@@ -1,0 +1,224 @@
+ScreenManager:
+    Home:
+
+<Home>:
+    name:"home"
+    
+    canvas:
+        Color:
+            rgba:root.colorl
+        Rectangle:
+            size:self.size
+
+    ActionBar:
+        size_hint_y:0.1
+        pos_hint:{'top':1}
+        background_color:0,0,1,1
+
+        ActionView:
+            use_separator:False
+
+            ActionPrevious:
+                with_previous:False
+                title:"CALCULATOR"
+                app_icon:app.icon
+
+            ActionButton:
+                important:True
+                text:"About"
+                on_release:
+                    root.manager.TransitionBase="SwapTransition"
+                    root.manager.transition.direction="left"
+                    root.manager.current="about"
+
+    BoxLayout:
+        orientation:"vertical"
+        pos_hint:{'top':0.9}
+
+        TextInput:
+            readonly:True
+            background_color:(1,1,1,1)
+            id:toplabel
+            halign:"center"
+            size_hint_y:0.07
+            font_size:20
+            text:""
+
+
+        TextInput:
+            halign:"right"
+            background_color:(1,1,1,1)
+            readonly:True
+            id:bottomlabel
+            size_hint_y:0.15
+            font_size:40
+            text:"0"
+
+        TabbedPanel:
+            size_hint: .9, .9
+            pos_hint:{'center_x':.5, 'center_y':.5}
+            do_default_tab:False
+
+            TabbedPanelItem:
+                text:"Normal"
+                size_hint_y:.05
+                GridLayout:
+                    cols:4
+                    rows:5
+                    Button:
+                        text:"C"
+                        background_color:1,0,0,1
+                        on_press:root.clearAll()
+
+                    Button:
+                        text:root.divisionsign
+                        background_color:0.6,.9,0.6,1
+                        on_press:root.divide()
+
+                    Button:
+                        text:"x"
+                        background_color:0.6,.9,0.6,1
+                        on_press:root.multiply()
+
+                    Button:
+                        text:root.deletionsign
+                        on_press:root.backspace()
+                        background_color:1,0,0,1
+
+                    Button:
+                        text:"7"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.seven()
+
+                    Button:
+                        text:"8"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.eight()
+
+                    Button:
+                        text:"9"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.nine()
+
+                    Button:
+                        text:"-"
+                        on_press:root.subtract()
+                        background_color:0.6,.9,0.6,1
+
+                    Button:
+                        text:"4"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.four()
+
+                    Button:
+                        text:"5"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.five()
+
+                    Button:
+                        text:"6"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.six()
+
+                    Button:
+                        text:"+"
+                        background_color:0.6,.9,0.6,1
+                        on_release:root.add()
+
+                    Button:
+                        text:"1"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.one()
+
+                    Button:
+                        text:"2"
+                        background_color:0.6,0.8,0.9,1
+                        on_release:root.two()
+
+                    Button:
+                        text:"3"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.three()
+
+                    Button:
+                        text:"="
+                        background_color:0.6,.9,0.6,1
+                        on_release:root.answer()
+
+                    Button:
+                        text:"0"
+                        background_color:0.6,0.8,0.9,1
+                        on_press:root.zero()
+
+                    Button:
+                        text:root.dotsign
+                        font_size:40
+                        background_color:0.6,.9,0.6,1
+                        on_press:root.putDot()
+
+                    Button:
+                        text:root.signchange
+                        background_color:0.6,.9,0.6,1
+                        on_press:root.changeSign()
+
+                    Button:
+                        text:root.settings
+                        background_color:0.4,.9,0.6,1
+                        on_release:root.squareRoot()            
+
+
+        Label:
+            text:"   "
+            font_size:20
+            size_hint_y:0.1
+
+<About>:
+    name:'about'
+    canvas:
+        Color:
+            rgba:(0.05,0.04,0.2,1)
+        Rectangle:
+            size:self.size
+    RelativeLayout:
+
+        size:root.size
+
+        ActionBar:
+            pos_hint:{'top':1}
+            size_hint_y:0.1
+            background_color:0,0,1,1
+            ActionView:
+                ActionPrevious:
+                    with_previous:True
+                    app_icon:app.icon
+                    on_press:
+                        root.manager.transition.direction="right"
+                        root.manager.current="home"
+                    title:"ABOUT APP"
+
+        GridLayout:
+            cols:1
+            rows:3
+            pos_hint:{'top':0.9}
+
+            BoxLayout:
+                orientation:"vertical"
+                RstDocument:
+                    size_hint_y:.8
+                    text:".. _top:\n\nAbout This Calculator\n============\n\n**This calculator app was developed using the python language. It utilizes the python graphics library kivy.** ::\n\n  To get more services like Web sites, Software apps and Tutoring services feel free to call or whatsapp :+263 787 062 575:\nSee More On Github https://github.com/Ngalo-bot/Calculator-Python \n\n Come and Learn To Code"
+                GridLayout:
+                    cols:2
+                    rows:2
+
+                    Image:
+                        source:"dev.png"
+                        texture_size:0.8,2
+
+                    Label:
+                        text:"[b]Developed by[/b] \n[b][color=#ff0000]Marvin Ngalonde[/color][/b]"
+                        size_hint_y:0.8
+                        width:self.width
+                        markup:True
+                    Label:
+                        size_hint_y:0.2
+
